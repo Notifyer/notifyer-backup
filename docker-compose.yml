@@ -25,3 +25,7 @@ services:
       - "traefik.http.routers.notifyer.tls.certresolver=letsencrypt" # if you named your cert resolver differently than letsencrypt, substitute it here!
     networks:
       - traefik-global-proxy # Traefik network! If you named it differently, substitute it here and below.
+
+networks:
+  traefik-global-proxy:
+    external: true
