@@ -23,6 +23,8 @@ services:
       - "traefik.http.routers.notifyer.rule=Host(`notifyer.capicua.org.es`)" # domain to expose on
       - "traefik.http.routers.notifyer.entrypoints=websecure" # if you named your 443 entrypoint differently than webscure, substitute it here!
       - "traefik.http.routers.notifyer.tls.certresolver=letsencrypt" # if you named your cert resolver differently than letsencrypt, substitute it here!
+    ports:
+      - "443:6923"
     networks:
       - traefik-global-proxy # Traefik network! If you named it differently, substitute it here and below.
 
