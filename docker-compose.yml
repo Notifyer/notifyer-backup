@@ -11,23 +11,10 @@ services:
       - "traefik.http.routers.backend.rule=Host(`notifyer.capicua.org.es`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
-    ports:
-      - '6923:6923'
+      - "traefik.http.services.backend.loadbalancer.server.port=6923"
     networks:
       - traefik-global-proxy 
-
-  nginx:
-    image: nginx
-    container_name: notifyer_proxy
-    labels:
-      - "traefik.enable=true" # enables the service
-      - "traefik.http.routers.notifyer.rule=Host(`notifyer.capicua.org.es`)" # domain to expose on
-      - "traefik.http.routers.notifyer.entrypoints=websecure" # if you named your 443 entrypoint differently than webscure, substitute it here!
-      - "traefik.http.routers.notifyer.tls.certresolver=letsencrypt" # if you named your cert resolver differently than letsencrypt, substitute it here!
-      #- "traefik.http.services.backend.loadbalancer.server.port=6923"
-    networks:
-      - traefik-global-proxy # Traefik network! If you named it differently, substitute it here and below.
-
+      
 networks:
   traefik-global-proxy:
     external: true
