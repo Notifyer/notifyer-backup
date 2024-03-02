@@ -1,0 +1,17 @@
+# Fetching the minified node image on apline linux
+FROM node:slim
+
+# Setting up the work directory
+WORKDIR /express-docker
+
+# Copying all the files in our project
+COPY . .
+
+# Installing dependencies
+RUN npm install
+
+# Starting our application
+CMD [ "node", "src/index.js" ]
+
+# Exposing server port
+EXPOSE 6923
