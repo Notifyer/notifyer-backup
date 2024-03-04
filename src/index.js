@@ -19,8 +19,12 @@ app.post('/data', (req, res) => {
     else res.status(500).send("Internal server error");
 })
 
-app.get('/data', async (req, res) => {
+app.get('/data/:idSession', async (req, res) => {
     try {
+        const id = req.params.idSession ? String(req.params.idSession) : false;
+
+        if (!id) return res.status(401).send("idSession not present");
+
         const data = await getRows();
 
         res.status(200).json(data);
