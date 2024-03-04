@@ -33,11 +33,10 @@ const deleteRow = async (id) => {
     }
 };
 
-const getRows = async (sessionId) => {
+const getRows = async (idSession) => {
     const db = await connect();
     try {
-        const sql = `SELECT * FROM notifications where idSession=${sessionId}`;
-        const rows = await db.all(sql);
+        const rows = await db.all("SELECT * FROM notifications WHERE idSession=?", idSession);
         for (let row of rows) {
             await deleteRow(row.id);
         }

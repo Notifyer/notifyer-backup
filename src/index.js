@@ -21,11 +21,11 @@ app.post('/data', (req, res) => {
 
 app.get('/data/:idSession', async (req, res) => {
     try {
-        const id = req.params.idSession ? String(req.params.idSession) : false;
+        const idSession = req.params.idSession ? String(req.params.idSession) : false;
 
-        if (!id) return res.status(401).send("idSession not present");
+        if (!idSession) return res.status(401).send("idSession not present");
 
-        const data = await getRows();
+        const data = await getRows(idSession);
 
         res.status(200).json(data);
     } catch (e) {
